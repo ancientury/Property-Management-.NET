@@ -1,0 +1,824 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ApplicationIcon>Resources\1368626615_1447.ico</ApplicationIcon>
+    <PublishUrl>C:\Users\xMuTaNtx\Desktop\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{46328A31-B68A-4E7D-9682-0CCC6B3B6DCC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>PMD.My.MyApplication</StartupObject>
+    <RootNamespace>PMD</RootNamespace>
+    <AssemblyName>Property Management .NET</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Property Management .NET.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Property Management .NET.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Releases|AnyCPU'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Releases\</OutputPath>
+    <DocumentationFile>Property Management .NET.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>727852633FB57892F8A18712C7FED79DDEC68374</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Property Management_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.DotNetBar.Keyboard, Version=10.9.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\DotNetBar for Windows Forms\DevComponents.DotNetBar.Keyboard.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar.Schedule, Version=10.9.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\DotNetBar for Windows Forms\DevComponents.DotNetBar.Schedule.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar.SuperGrid, Version=10.9.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\DotNetBar for Windows Forms\DevComponents.DotNetBar.SuperGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=10.9.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\DotNetBar for Windows Forms\DevComponents.DotNetBar2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.Instrumentation, Version=10.9.0.4, Culture=neutral, PublicKeyToken=f90dc37c26666a67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\DotNetBar for Windows Forms\DevComponents.Instrumentation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.SuperGrid.Design, Version=10.9.0.4, Culture=neutral, PublicKeyToken=26d81176cfa2b486, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\DotNetBar for Windows Forms\DevComponents.SuperGrid.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.TreeGX, Version=10.9.0.4, Culture=neutral, PublicKeyToken=055db68f670cfeab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\DotNetBar for Windows Forms\DevComponents.TreeGX.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GemBox.Spreadsheet, Version=47.0.0.1298, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
+      <HintPath>..\packages\GemBox.Spreadsheet.47.0.1298\lib\net35\GemBox.Spreadsheet.dll</HintPath>
+    </Reference>
+    <Reference Include="GemBox.Spreadsheet.WinFormsUtilities, Version=47.0.0.1298, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
+      <HintPath>..\packages\GemBox.Spreadsheet.WinFormsUtilities.47.0.1298\lib\net35\GemBox.Spreadsheet.WinFormsUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.2.6\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.2.6\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.0.27.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\ZstdNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Classes\SettingsINI.vb" />
+    <Compile Include="Main Forms\AccountsForm.Designer.vb">
+      <DependentUpon>AccountsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main Forms\AccountsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\AddFundsForm.Designer.vb">
+      <DependentUpon>AddFundsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\AddFundsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report Template\CrystalReport.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\CurrencyTextBox.Designer.vb">
+      <DependentUpon>CurrencyTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CurrencyTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report Template\dsReport.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report Template\dsReport.vb">
+      <DependentUpon>dsReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\LandlineDialog.Designer.vb">
+      <DependentUpon>LandlineDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\LandlineDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\MaintainenceLogForm.Designer.vb">
+      <DependentUpon>MaintainenceLogForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\MaintainenceLogForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\NotificationForm.Designer.vb">
+      <DependentUpon>NotificationForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\NotificationForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\QuickSearchForm.Designer.vb">
+      <DependentUpon>QuickSearchForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\QuickSearchForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\ReportForm.Designer.vb">
+      <DependentUpon>ReportForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\ReportForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Forms\SettingsForm.Designer.vb">
+      <DependentUpon>SettingsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main Forms\SettingsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SkyDialog.Designer.vb">
+      <DependentUpon>SkyDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SkyDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\TaskForm.Designer.vb">
+      <DependentUpon>TaskForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\TaskForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\AutoCompleteModule.vb" />
+    <Compile Include="Dialogs\ContactDialog.Designer.vb">
+      <DependentUpon>ContactDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ContactDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\DetailsForm.Designer.vb">
+      <DependentUpon>DetailsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\DetailsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\GlobalVars.vb" />
+    <Compile Include="Extended Forms\InvoiceForm.Designer.vb">
+      <DependentUpon>InvoiceForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\InvoiceForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\LinkContractForm.Designer.vb">
+      <DependentUpon>LinkContractForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\LinkContractForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Forms\LogForm.Designer.vb">
+      <DependentUpon>LogForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main Forms\LogForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Forms\LoginForm.Designer.vb">
+      <DependentUpon>LoginForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main Forms\LoginForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Forms\MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Forms\MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Extended Forms\AssetForm.Designer.vb">
+      <DependentUpon>AssetForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\AssetForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\ContractForm.Designer.vb">
+      <DependentUpon>ContractForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\ContractForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Forms\ParentMdiForm.Designer.vb">
+      <DependentUpon>ParentMdiForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main Forms\ParentMdiForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Forms\TasksForm.Designer.vb">
+      <DependentUpon>TasksForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main Forms\TasksForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extended Forms\SearchForm.Designer.vb">
+      <DependentUpon>SearchForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extended Forms\SearchForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\SortComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Main Forms\UserAccountsForm.Designer.vb">
+      <DependentUpon>UserAccountsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main Forms\UserAccountsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Forms\SetupForm.designer.vb">
+      <DependentUpon>SetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main Forms\SetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Main Forms\AccountsForm.resx">
+      <DependentUpon>AccountsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\AddFundsForm.resx">
+      <DependentUpon>AddFundsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report Template\CrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\LandlineDialog.resx">
+      <DependentUpon>LandlineDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\MaintainenceLogForm.resx">
+      <DependentUpon>MaintainenceLogForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\NotificationForm.resx">
+      <DependentUpon>NotificationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\QuickSearchForm.resx">
+      <DependentUpon>QuickSearchForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\ReportForm.resx">
+      <DependentUpon>ReportForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SkyDialog.resx">
+      <DependentUpon>SkyDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\TaskForm.resx">
+      <DependentUpon>TaskForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ContactDialog.resx">
+      <DependentUpon>ContactDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\DetailsForm.resx">
+      <DependentUpon>DetailsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\InvoiceForm.resx">
+      <DependentUpon>InvoiceForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\LinkContractForm.resx">
+      <DependentUpon>LinkContractForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Forms\LogForm.resx">
+      <DependentUpon>LogForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Forms\LoginForm.resx">
+      <DependentUpon>LoginForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Forms\MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\AssetForm.resx">
+      <DependentUpon>AssetForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\ContractForm.resx">
+      <DependentUpon>ContractForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Forms\ParentMdiForm.resx">
+      <DependentUpon>ParentMdiForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Forms\TasksForm.resx">
+      <DependentUpon>TasksForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extended Forms\SearchForm.resx">
+      <DependentUpon>SearchForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Forms\UserAccountsForm.resx">
+      <DependentUpon>UserAccountsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Forms\SetupForm.resx">
+      <DependentUpon>SetupForm.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Report Template\dsReport.xsc">
+      <DependentUpon>dsReport.xsd</DependentUpon>
+    </None>
+    <None Include="Report Template\dsReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Report Template\dsReport.xss">
+      <DependentUpon>dsReport.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Property Management_TemporaryKey.pfx" />
+    <None Include="Resources\database.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364439132_plus_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364417267_personal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364511183_dialog-close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364519814_export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364519814_export1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364676805_plus_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364676824_edit_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364677402_tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364677427_tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364677462_101.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364439631_Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364439651_adept_update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364677462_1011.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364945045_list-remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364353037_Edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364946094_pencil_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364949315_3floppy_unmount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364511183_dialog-close1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364676805_plus_161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364676824_edit_remove1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1364676805_plus_162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1365117598_adept_update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366070600_photo-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366082428_references.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366084171_business-info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366084365_file-info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366084602_Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366094008_link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366094730_attach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366094754_attach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366094754_attach1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366155461_cog-icon-2-48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366156197_cog-icon-2-48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366156245_cog-icon-2-48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366156454_Magnifier2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366156547_personal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366156689_stock_new-24h-appointment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366156831_book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366163667_gnome-session-logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366163951_gnome-session-logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366219935_scanner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366219963_scanner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366227956_magnifier-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366598510_X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366841468_preferences-contact-list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366845442_Login Manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366845475_Login Manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366845681_preferences-desktop-cryptography.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366869215_gnome-session-logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366929459_personal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366929476_adept_update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1366954939_login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1367010776_Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1367010962_application_view_detail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1367126683_Magnifier2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1367126706_Magnifier2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1367128004_calendar-today.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1367128105_Magnifier2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1367128912_taskbar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1367128962_view_text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1367129000_text_list_bullets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1368217226_book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1368217289_book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\1368626615_1447.ico" />
+    <None Include="Resources\20 Pound GBP Notes copy1.jpg" />
+    <None Include="Resources\20 Pound GBP Notes copy.jpg" />
+    <None Include="Resources\1373215226_taxes.png" />
+    <None Include="Resources\summer_logo.png" />
+    <None Include="Resources\250px-Sky1_logo_2011-small.svg2.png" />
+    <None Include="Resources\250px-Sky1_logo_2011.svg.png" />
+    <None Include="Resources\250px-Sky1_logo_2011-small.svg1.png" />
+    <None Include="Resources\250px-Sky1_logo_2011-small.svg.png" />
+    <None Include="Resources\SkyLogo_300x300.jpg_177254702.jpg" />
+    <None Include="Resources\1369847540_CarGrey-small.png" />
+    <None Include="Resources\1369847481_224261-camera-web-small.png" />
+    <None Include="Resources\1369847220_tv-small.png" />
+    <None Include="Resources\1369847202_mycomputer-small.png" />
+    <None Include="Resources\1369847130_questionmark-small.png" />
+    <None Include="Resources\1369847023_Apple iPhone-small.png" />
+    <None Include="Resources\1373126017_contact.png" />
+    <None Include="Resources\1373125046_access_point1.png" />
+    <None Include="Resources\1373125046_access_point.png" />
+    <None Include="Resources\1369846901_access_point.png" />
+    <None Include="Resources\1372966538_system-software-update.png" />
+    <None Include="Resources\1371073532_report.png" />
+    <None Include="Resources\1371058447_drawing_pen.png" />
+    <None Include="Resources\1371058292_invoice.png" />
+    <None Include="Resources\1370984181_file_extension_doc.png" />
+    <None Include="Resources\1370980152_Purse.png" />
+    <None Include="Resources\1370980034_Money.png" />
+    <None Include="Resources\1370908236_PDF Viewer.png" />
+    <None Include="Resources\1370908087_Dollars.png" />
+    <None Include="Resources\1370906915_Money.png" />
+    <None Include="Resources\1370905490_money_pound_add.png" />
+    <None Include="Resources\1370905372_file-pdf.png" />
+    <None Include="Resources\1370905185_file_extension_pdf.png" />
+    <None Include="Resources\1370904205_table_money.png" />
+    <None Include="Resources\1370545311_contact-new.png" />
+    <None Include="Resources\1370461355_tick_16.png" />
+    <None Include="Resources\1370307616_appointment-missed.png" />
+    <None Include="Resources\1370307445_free-for-job.png" />
+    <None Include="Resources\1370305115_alarm.png" />
+    <None Include="Resources\1370304980_ringtone.png" />
+    <None Include="Resources\1369851516_Gnome-Task-Due-64.png" />
+    <None Include="Resources\1369846665_Document-write-icon.png" />
+    <None Include="Resources\1369846513_stock_task.png" />
+    <None Include="Resources\1369843451_Log Out.png" />
+    <None Include="Resources\1369843433_gnome-session-logout.png" />
+    <None Include="Resources\1369843403_preferences-desktop-user-password.png" />
+    <None Include="Resources\1369843377_cog-icon-2-48x48.png" />
+    <None Include="Resources\1369843356_preferences-calendar-and-tasks.png" />
+    <None Include="Resources\1369843309_search.png" />
+    <None Include="Resources\1369843273_calculator_edit.png" />
+    <None Include="Resources\1369843066_personal.png" />
+    <None Include="Resources\1369843023_Calculator.png" />
+    <None Include="Resources\1369842893_calculator.png" />
+    <None Include="Resources\1369842851_calculator.png" />
+    <None Include="Resources\1369842661_coins.png" />
+    <None Include="Resources\1369842535_Business.png" />
+    <None Include="Resources\1369839118_Log Out.png" />
+    <None Include="Resources\1369537280_kfind.png" />
+    <None Include="Resources\1368851902_credit_card.png" />
+    <None Include="Resources\1368713902_telephone_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
