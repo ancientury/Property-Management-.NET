@@ -32,13 +32,24 @@ Public Class SetupForm
             ' Create properties table
             query = "CREATE TABLE properties (
                         id int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+                        username varchar(20) NOT NULL,
                         company varchar(25) NOT NULL,
                         address varchar(255) NOT NULL,
                         country varchar(90) NOT NULL,
                         county varchar(50) NOT NULL,
                         city varchar(189) NOT NULL,
                         postcode varchar(18) NOT NULL,
-                        telephone int NOT NULL
+                        telephone varchar(30) NOT NULL,
+                        note varchar(255) NOT NULL,
+                        gas_meter_type varchar(30) NOT NULL,
+                        gas_meter_reading varchar(20) NOT NULL,
+                        gas_meter_timestamp datetime DEFAULT GETDATE(),
+                        electricity_meter_type varchar(30) NOT NULL,
+                        electricity_meter_reading varchar(20) NOT NULL,
+                        electricity_meter_timestamp datetime DEFAULT GETDATE(),
+                        water_meter_type varchar(30) NOT NULL,
+                        water_meter_reading varchar(20) NOT NULL,
+                        water_meter_timestamp datetime DEFAULT GETDATE(),
             ); "
 
             cmd = New SqlCommand(query, cnn)
@@ -173,6 +184,17 @@ Public Class SetupForm
                         username varchar(20) NOT NULL,
                         invoice_id int FOREIGN KEY REFERENCES invoices(id),
                         id int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+            ); "
+
+            cmd = New SqlCommand(query, cnn)
+            cmd.ExecuteNonQuery()
+
+            ' Create photos table
+            query = "CREATE TABLE photos (
+                        property_id int FOREIGN KEY REFERENCES properties(id),
+                        username varchar(20) NOT NULL,
+                        id int IDENTITY(1,1) PRIMARY KEY,
+                        image_file image NOT NULL
             ); "
 
             cmd = New SqlCommand(query, cnn)
@@ -333,7 +355,4 @@ Public Class SetupForm
 
     End Sub
 
-    Private Sub SetupForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class
