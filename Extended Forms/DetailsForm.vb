@@ -2,11 +2,12 @@
 Imports MySql.Data.MySqlClient
 Imports System.Threading
 Imports System.IO
+Imports System.Data.SqlClient
 
 Public Class DetailsForm
     Public Id, SelectedAssetTable, AssetType As String
     Private totalAssets, totalContracts, totalInvoices, SelectedTab As Integer
-    Public EditMode, NewRecord, CheckEdit, PhotoAvailable As Boolean
+    Public EditMode, NewRecord, CheckEdit As Boolean
     Private PhotoThread, DeleteThread, ContractsThread, ContactsThread, InvoicesThread, AssetsThread, MLogsThread As Thread
 
     Private Sub DeleteProperty()
@@ -334,14 +335,13 @@ Public Class DetailsForm
 
     Private Sub DetailsForm_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         CheckEdit = False
+
         If NewRecord = True Then
-            Id = GlobalVars.randomID()
             Me.Text = "New Property"
-            Header.Text = "Property ID: " & Id & vbNewLine & Company.Text
             SaveBtn.Text = "Save"
             EditMode = True
             NewRecord = True
-            EditBtn_Click(Nothing, Nothing)
+            EditBtn.PerformClick()
             EditBtn.Visible = False
             Tab2.Enabled = False
             Tab3.Enabled = False
@@ -350,54 +350,74 @@ Public Class DetailsForm
         Else
             ' Load Property Photo
 
-            Dim cmd As New MySqlCommand("SELECT * FROM " & GlobalVars.tbl_PICTURES & " WHERE PROPERTY_ID = '" & Id & "' AND PICTURE_ID = '" & Id & "' ", GlobalVars.cn)
-            Dim tempPath As String
-            Using dr As MySqlDataReader = cmd.ExecuteReader()
-                If dr.Read() Then
-                    PhotoAvailable = True
-                    tempPath = System.IO.Path.GetTempPath + dr.Item("FILENAME")
-                    Dim fs As IO.FileStream = New IO.FileStream(tempPath, IO.FileMode.Create)
-                    Dim b() As Byte = dr.Item("PICTURE")
-                    fs.Write(b, 0, b.Length)
-                    fs.Close()
-                End If
-            End Using
 
-            If PhotoAvailable = True Then
-                PropertyPicture.Load(tempPath)
-            End If
 
-            cmd = New MySqlCommand("SELECT * FROM " & GlobalVars.tbl_PROPERTIES & " WHERE PROPERTY_ID = @PROPERTY_ID", GlobalVars.cn)
-            cmd.Parameters.AddWithValue("@PROPERTY_ID", Id)
-            Using dr As MySqlDataReader = cmd.ExecuteReader()
-                If dr.Read() Then
-                    Company.Text = dr.Item("COMPANY").ToString
-                    Address.Text = dr.Item("ADDRESS").ToString
-                    County.Text = dr.Item("COUNTY").ToString
-                    City.Text = dr.Item("CITY").ToString
-                    Postcode.Text = dr.Item("POSTCODE").ToString
-                    Telephone.Text = dr.Item("TELEPHONE").ToString
-                    Notes.Text = dr.Item("NOTES").ToString
-                    GasMeterType.Text = dr.Item("GAS_METER_TYPE").ToString
-                    ElectricityMeterType.Text = dr.Item("ELECTRICITY_METER_TYPE").ToString
-                    WaterMeterType.Text = dr.Item("WATER_METER_TYPE").ToString
-                    GasMeterReading.Text = dr.Item("GAS_METER_READING").ToString
-                    GasTimeStamp.Text = dr.Item("GAS_METER_TIMESTAMP").ToString
-                    ElectricityMeterReading.Text = dr.Item("ELECTRICITY_METER_READING").ToString
-                    ElectricityTimeStamp.Text = dr.Item("ELECTRICITY_METER_TIMESTAMP").ToString
-                    WaterMeterReading.Text = dr.Item("WATER_METER_READING").ToString
-                    WaterTimeStamp.Text = dr.Item("WATER_METER_TIMESTAMP").ToString
-                    totalAssets = dr.Item("TOTAL_ASSETS")
-                    totalContracts = dr.Item("TOTAL_CONTRACTS")
-                    totalInvoices = dr.Item("TOTAL_INVOICES")
-                    Header.Text = Company.Text & vbNewLine & Address.Text & vbNewLine & vbNewLine & "Property ID: " & Id & vbNewLine & "Total Assets: " & totalAssets.ToString & vbNewLine & "Total Contracts: " & totalContracts.ToString & vbNewLine & "Total Invoices: " & totalInvoices.ToString
-                End If
-            End Using
+            Dim cnn As SqlConnection = New SqlConnection(GlobalVars.connectionString)
+            Dim cmd As SqlCommand
+            Dim query As String
+
+            Try
+                cnn.Open()
+
+                query = "SELECT * FROM photos WHERE property_id = @PROPERTY_ID AND id = 1"
+                cmd = New SqlCommand(query, cnn)
+                cmd.Parameters.AddWithValue("@PROPERTY_ID", Id)
+
+                Using dr As SqlDataReader = cmd.ExecuteReader()
+                    If dr.Read() Then
+
+                        Dim tempPath As String = System.IO.Path.GetTempPath + dr.Item("FILENAME")
+                        Dim fs As IO.FileStream = New IO.FileStream(tempPath, IO.FileMode.Create)
+                        Dim b() As Byte = dr.Item("PICTURE")
+                        fs.Write(b, 0, b.Length)
+                        fs.Close()
+
+                        PropertyPicture.Load(tempPath)
+
+                    End If
+                End Using
+
+                query = "SELECT * FROM properties WHERE id = @PROPERTY_ID"
+                cmd = New SqlCommand(query, cnn)
+                cmd.Parameters.AddWithValue("@PROPERTY_ID", Id)
+
+                Using dr As SqlDataReader = cmd.ExecuteReader()
+                    If dr.Read() Then
+                        Company.Text = dr.Item("company")
+                        Address.Text = dr.Item("address")
+                        Country.Text = dr.Item("country")
+                        County.Text = dr.Item("county")
+                        City.Text = dr.Item("city")
+                        Postcode.Text = dr.Item("postcode")
+                        Telephone.Text = dr.Item("telephone")
+                        Notes.Text = dr.Item("note")
+                        GasMeterType.Text = dr.Item("gas_meter_type")
+                        GasMeterReading.Text = dr.Item("gas_meter_reading")
+                        GasTimeStamp.Value = CDate(dr.Item("gas_meter_timestamp"))
+                        ElectricityMeterType.Text = dr.Item("electricity_meter_type")
+                        ElectricityMeterReading.Text = dr.Item("electricity_meter_reading")
+                        ElectricityTimeStamp.Value = CDate(dr.Item("electricity_meter_timestamp"))
+                        WaterMeterType.Text = dr.Item("water_meter_type")
+                        WaterMeterReading.Text = dr.Item("water_meter_reading")
+                        WaterTimeStamp.Value = CDate(dr.Item("water_meter_timestamp"))
+
+                        Header.Text = Company.Text & vbNewLine & Address.Text & vbNewLine & vbNewLine & "Property ID: " & Id & vbNewLine & "Total Assets: " & totalAssets.ToString & vbNewLine & "Total Contracts: " & totalContracts.ToString & vbNewLine & "Total Invoices: " & totalInvoices.ToString
+                    End If
+                End Using
+
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Finally
+                cnn.Close()
+            End Try
+
             Me.Text = "Property Details - " & Company.Text
             EditMode = False
             NewRecord = False
-            EditBtn_Click(Nothing, Nothing)
-            ReadContacts()
+            EditBtn.PerformClick()
+
+            'ReadContacts()
+
         End If
     End Sub
 
@@ -412,6 +432,7 @@ Public Class DetailsForm
                     AttachPhotoBtn.Visible = True
                     Company.ReadOnly = False
                     Address.ReadOnly = False
+                    Country.Enabled = True
                     County.Enabled = True
                     City.Enabled = True
                     Postcode.ReadOnly = False
@@ -440,13 +461,18 @@ Public Class DetailsForm
                     RemoveMLogBtn.Visible = True
                 End If
                 EditBtn.Text = "Cancel Edit"
-                ReadContacts()
+
+                If NewRecord = False Then
+                    ReadContacts()
+                End If
+
                 EditMode = False
             Case False
                 If TabControl.SelectedPanel Is Tab1 Then
                     AttachPhotoBtn.Visible = False
                     Address.ReadOnly = True
                     Company.ReadOnly = True
+                    Country.Enabled = False
                     County.Enabled = False
                     City.Enabled = False
                     Postcode.ReadOnly = True
@@ -480,68 +506,78 @@ Public Class DetailsForm
 
     Private Sub SaveBtn_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SaveBtn.Click
         SaveBtn.Enabled = False
-        Dim sqlQuery As String
-        Dim cmd As MySqlCommand
-        If NewRecord = True Then
-            sqlQuery = "REPLACE INTO " & GlobalVars.tbl_PROPERTIES & " VALUES(@Id, @Username, @Company, @Address, @County, @City, @Postcode, @Telephone, @Notes, @GasMeterType, @ElectricityMeterType, @WaterMeterType, @GasMeterReading, @GasTimeStamp, @ElectricityMeterReading, @ElectricityTimeStamp, @WaterMeterReading, @WaterTimeStamp, 0, 0, 0) "
-            cmd = New MySqlCommand(sqlQuery, GlobalVars.cn)
-            cmd.Parameters.AddWithValue("@Id", Id)
-            cmd.Parameters.AddWithValue("@Username", GlobalVars.Username)
-            cmd.Parameters.AddWithValue("@Company", Company.Text)
-            cmd.Parameters.AddWithValue("@Address", Address.Text)
-            cmd.Parameters.AddWithValue("@County", County.Text)
-            cmd.Parameters.AddWithValue("@City", City.Text)
-            cmd.Parameters.AddWithValue("@Postcode", Postcode.Text)
-            cmd.Parameters.AddWithValue("@Telephone", Telephone.Text)
-            cmd.Parameters.AddWithValue("@Notes", Notes.Text)
-            cmd.Parameters.AddWithValue("@GasMeterType", GasMeterType.Text)
-            cmd.Parameters.AddWithValue("@ElectricityMeterType", ElectricityMeterType.Text)
-            cmd.Parameters.AddWithValue("@WaterMeterType", WaterMeterType.Text)
-            cmd.Parameters.AddWithValue("@GasMeterReading", GasMeterReading.Text)
-            cmd.Parameters.AddWithValue("@GasTimeStamp", GasTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
-            cmd.Parameters.AddWithValue("@ElectricityMeterReading", ElectricityMeterReading.Text)
-            cmd.Parameters.AddWithValue("@ElectricityTimeStamp", ElectricityTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
-            cmd.Parameters.AddWithValue("@WaterMeterReading", WaterMeterReading.Text)
-            cmd.Parameters.AddWithValue("@WaterTimeStamp", WaterTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
-        Else
 
-            If NewRecord = False And SettingsINI.ReadINIValue("Prompts", "AskBeforeModifyingProperties").Equals("Yes") Then
-                If MessageBox.Show("Are you sure you want to modify this invoice?.", "Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.No Then
-                    Exit Sub
-                End If
-            End If
-
-            sqlQuery = "UPDATE " & GlobalVars.tbl_PROPERTIES & " SET COMPANY = @Company, ADDRESS = @Address, COUNTY = @County, CITY = @City, POSTCODE = @Postcode, TELEPHONE = @Telephone, NOTES = @Notes, GAS_METER_TYPE = @GasMeterType, ELECTRICITY_METER_TYPE = @ElectricityMeterType, WATER_METER_TYPE = @WaterMeterType, GAS_METER_READING =  @GasMeterReading, GAS_METER_TIMESTAMP = @GasTimeStamp, ELECTRICITY_METER_READING = @ElectricityMeterReading, ELECTRICITY_METER_TIMESTAMP = @ElectricityTimeStamp, WATER_METER_READING = @WaterMeterReading, WATER_METER_TIMESTAMP = @WaterTimeStamp WHERE PROPERTY_ID = @Id "
-            cmd = New MySqlCommand(sqlQuery, GlobalVars.cn)
-            cmd.Parameters.AddWithValue("@Id", Id)
-            cmd.Parameters.AddWithValue("@Company", Company.Text)
-            cmd.Parameters.AddWithValue("@Address", Address.Text)
-            cmd.Parameters.AddWithValue("@County", County.Text)
-            cmd.Parameters.AddWithValue("@City", City.Text)
-            cmd.Parameters.AddWithValue("@Postcode", Postcode.Text)
-            cmd.Parameters.AddWithValue("@Telephone", Telephone.Text)
-            cmd.Parameters.AddWithValue("@Notes", Notes.Text)
-            cmd.Parameters.AddWithValue("@GasMeterType", GasMeterType.Text)
-            cmd.Parameters.AddWithValue("@ElectricityMeterType", ElectricityMeterType.Text)
-            cmd.Parameters.AddWithValue("@WaterMeterType", WaterMeterType.Text)
-            cmd.Parameters.AddWithValue("@GasMeterReading", GasMeterReading.Text)
-            cmd.Parameters.AddWithValue("@GasTimeStamp", GasTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
-            cmd.Parameters.AddWithValue("@ElectricityMeterReading", ElectricityMeterReading.Text)
-            cmd.Parameters.AddWithValue("@ElectricityTimeStamp", ElectricityTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
-            cmd.Parameters.AddWithValue("@WaterMeterReading", WaterMeterReading.Text)
-            cmd.Parameters.AddWithValue("@WaterTimeStamp", WaterTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
-        End If
+        Dim cnn As SqlConnection = New SqlConnection(GlobalVars.connectionString)
+        Dim cmd As SqlCommand
+        Dim query As String
 
         Try
+            cnn.Open()
+
+            If NewRecord = True Then
+                query = "INSERT INTO properties VALUES(@Username, @Company, @Address, @Country, @County, @City, @Postcode, @Telephone, @Notes, @GasMeterType, @GasMeterReading, @GasTimeStamp, @ElectricityMeterType, @ElectricityMeterReading, @ElectricityTimeStamp, @WaterMeterType, @WaterMeterReading, @WaterTimeStamp) "
+                cmd = New SqlCommand(query, cnn)
+                cmd.Parameters.AddWithValue("@Username", GlobalVars.Username)
+                cmd.Parameters.AddWithValue("@Company", Company.Text)
+                cmd.Parameters.AddWithValue("@Address", Address.Text)
+                cmd.Parameters.AddWithValue("@Country", Country.Text)
+                cmd.Parameters.AddWithValue("@County", County.Text)
+                cmd.Parameters.AddWithValue("@City", City.Text)
+                cmd.Parameters.AddWithValue("@Postcode", Postcode.Text)
+                cmd.Parameters.AddWithValue("@Telephone", Telephone.Text)
+                cmd.Parameters.AddWithValue("@Notes", Notes.Text)
+                cmd.Parameters.AddWithValue("@GasMeterType", GasMeterType.Text)
+                cmd.Parameters.AddWithValue("@GasMeterReading", GasMeterReading.Text)
+                cmd.Parameters.AddWithValue("@GasTimeStamp", GasTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
+                cmd.Parameters.AddWithValue("@ElectricityMeterType", ElectricityMeterType.Text)
+                cmd.Parameters.AddWithValue("@ElectricityMeterReading", ElectricityMeterReading.Text)
+                cmd.Parameters.AddWithValue("@ElectricityTimeStamp", ElectricityTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
+                cmd.Parameters.AddWithValue("@WaterMeterType", WaterMeterType.Text)
+                cmd.Parameters.AddWithValue("@WaterMeterReading", WaterMeterReading.Text)
+                cmd.Parameters.AddWithValue("@WaterTimeStamp", WaterTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
+            Else
+
+                If NewRecord = False And SettingsINI.ReadINIValue("Prompts", "AskBeforeModifyingProperties").Equals("Yes") Then
+                    If MessageBox.Show("Are you sure you want to modify this property?.", "Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.No Then
+                        Exit Try
+                    End If
+                End If
+
+                query = "UPDATE properties SET COMPANY = @Company, ADDRESS = @Address, COUNTY = @County, CITY = @City, POSTCODE = @Postcode, TELEPHONE = @Telephone, NOTES = @Notes, GAS_METER_TYPE = @GasMeterType, ELECTRICITY_METER_TYPE = @ElectricityMeterType, WATER_METER_TYPE = @WaterMeterType, GAS_METER_READING =  @GasMeterReading, GAS_METER_TIMESTAMP = @GasTimeStamp, ELECTRICITY_METER_READING = @ElectricityMeterReading, ELECTRICITY_METER_TIMESTAMP = @ElectricityTimeStamp, WATER_METER_READING = @WaterMeterReading, WATER_METER_TIMESTAMP = @WaterTimeStamp WHERE PROPERTY_ID = @Id "
+                cmd = New SqlCommand(query, cnn)
+                cmd.Parameters.AddWithValue("@Id", Id)
+                cmd.Parameters.AddWithValue("@Company", Company.Text)
+                cmd.Parameters.AddWithValue("@Address", Address.Text)
+                cmd.Parameters.AddWithValue("@County", County.Text)
+                cmd.Parameters.AddWithValue("@City", City.Text)
+                cmd.Parameters.AddWithValue("@Postcode", Postcode.Text)
+                cmd.Parameters.AddWithValue("@Telephone", Telephone.Text)
+                cmd.Parameters.AddWithValue("@Notes", Notes.Text)
+                cmd.Parameters.AddWithValue("@GasMeterType", GasMeterType.Text)
+                cmd.Parameters.AddWithValue("@ElectricityMeterType", ElectricityMeterType.Text)
+                cmd.Parameters.AddWithValue("@WaterMeterType", WaterMeterType.Text)
+                cmd.Parameters.AddWithValue("@GasMeterReading", GasMeterReading.Text)
+                cmd.Parameters.AddWithValue("@GasTimeStamp", GasTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
+                cmd.Parameters.AddWithValue("@ElectricityMeterReading", ElectricityMeterReading.Text)
+                cmd.Parameters.AddWithValue("@ElectricityTimeStamp", ElectricityTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
+                cmd.Parameters.AddWithValue("@WaterMeterReading", WaterMeterReading.Text)
+                cmd.Parameters.AddWithValue("@WaterTimeStamp", WaterTimeStamp.Value.ToString("yyyy-MM-dd HH:mm:ss"))
+            End If
+
+
             cmd.ExecuteNonQuery()
+
             NewRecord = False
             EditBtn.Visible = True
-            EditBtn_Click(Nothing, Nothing)
+            EditBtn.PerformClick()
+
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
+            cnn.Close()
             SaveBtn.Enabled = True
         End Try
+
     End Sub
 
     Private Sub DeleteBtn_Click(ByVal sender As Object, ByVal e As EventArgs) Handles DeleteBtn.Click
@@ -876,6 +912,12 @@ Public Class DetailsForm
 
     Private Sub LogsGrid_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles LogsGrid.RowsAdded
         RemoveMLogBtn.Enabled = True
+    End Sub
+
+    Private Sub Company_TextChanged(sender As Object, e As EventArgs) Handles Company.TextChanged
+        If NewRecord = True Then
+            Header.Text = "Company: " & Company.Text
+        End If
     End Sub
 
     Private Sub MeterTypeCombo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles GasMeterType.SelectionChangeCommitted
